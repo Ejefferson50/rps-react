@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"rpsreact504b1f90": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

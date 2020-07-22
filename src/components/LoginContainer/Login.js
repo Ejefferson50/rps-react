@@ -11,12 +11,12 @@ export default class Login extends Component {
                     <h1>Log In</h1>
                     <form>
 
-                        <input className="inputBox" type="text" name="username" placeholder="Username" />
+                        <input className="inputBox username" type="text" name="username" placeholder="Username" />
 
                         <br />
                         <br />
 
-                        <input className="inputBox" type="password" name="password" placeholder="Password" />
+                        <input className="inputBox password" type="password" name="password" placeholder="Password" />
 
                         <br />
                         <br />

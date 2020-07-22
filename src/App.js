@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Amplify, { Auth } from 'aws-amplify';
+import awsmobile from './aws-exports.js';
+
+
+ 
 
 //Importing Login Features
 import Welcome from './components/LoginContainer/Welcome';
@@ -16,6 +21,8 @@ import Terms from './components/CustomContainer/Terms';
 import Rules from './components/CustomContainer/Rules';
 import PVE from './components/GameContainer/PVE';
 import PVP from './components/GameContainer/PVP';
+import { AmplifyAuthenticator,AmplifySignIn, AmplifySignOut } from '@aws-amplify/ui-react';
+Amplify.configure (awsmobile);
 
 export default class App extends Component {
     constructor(props){
