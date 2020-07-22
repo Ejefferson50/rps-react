@@ -17,6 +17,14 @@ import Rules from './components/CustomContainer/Rules';
 import PVE from './components/GameContainer/PVE';
 import PVP from './components/GameContainer/PVP';
 
+//Importing AWS Amplify
+import Amplify, {Auth} from 'aws-amplify';
+import awsmobile from './aws-exports.js';
+import { AmplifyAuthenticator, AmplifySignIn, AmplifySignOut} from '@aws-amplify/ui-react';
+
+Amplify.configure(awsmobile);
+
+
 export default class App extends Component {
     constructor(props){
         super(props);
@@ -53,6 +61,7 @@ export default class App extends Component {
         return (
             <Router>
                 <div className="App">
+                  
                     <Switch>
                         <Route exact path='/' component={Welcome} />
                         <Route path='/welcome' component={Welcome} />
