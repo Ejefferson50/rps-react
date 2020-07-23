@@ -7,7 +7,7 @@ function EnterButton(){
         <button       
         type="button"
         class="btn btn-info"         
-        onClick={() => {history.push('/user')}}
+        onClick={() => {history.push('/home')}}
         > Enter </button>
     ));
 

@@ -117,6 +117,128 @@
 				}
 			}
 		},
+		"storagerpsusers": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/storage/rpsusers-cloudformation-template.json",
+				"Parameters": {
+					"tableName": "rpsusers",
+					"partitionKeyName": "user_id",
+					"partitionKeyType": "N",
+					"env": "dev"
+				}
+			}
+		},
+		"storagerpsusertable": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/storage/rpsusertable-cloudformation-template.json",
+				"Parameters": {
+					"tableName": "rpsusertable",
+					"partitionKeyName": "user_id",
+					"partitionKeyType": "N",
+					"sortKeyName": "user_email",
+					"sortKeyType": "S",
+					"env": "dev"
+				}
+			}
+		},
+		"functionrpscrud": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/function/rpscrud-cloudformation-template.json",
+				"Parameters": {
+					"storagerpsusersName": {
+						"Fn::GetAtt": [
+							"storagerpsusers",
+							"Outputs.Name"
+						]
+					},
+					"storagerpsusersArn": {
+						"Fn::GetAtt": [
+							"storagerpsusers",
+							"Outputs.Arn"
+						]
+					},
+					"env": "dev"
+				}
+			}
+		},
+		"functionrpslambda": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/function/rpslambda-cloudformation-template.json",
+				"Parameters": {
+					"storagerpsusertableName": {
+						"Fn::GetAtt": [
+							"storagerpsusertable",
+							"Outputs.Name"
+						]
+					},
+					"storagerpsusertableArn": {
+						"Fn::GetAtt": [
+							"storagerpsusertable",
+							"Outputs.Arn"
+						]
+					},
+					"env": "dev"
+				}
+			}
+		},
+		"apirpsplayers": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/api/rpsplayers-cloudformation-template.json",
+				"Parameters": {
+					"authRoleName": {
+						"Ref": "AuthRoleName"
+					},
+					"unauthRoleName": {
+						"Ref": "UnauthRoleName"
+					},
+					"functionrpscrudName": {
+						"Fn::GetAtt": [
+							"functionrpscrud",
+							"Outputs.Name"
+						]
+					},
+					"functionrpscrudArn": {
+						"Fn::GetAtt": [
+							"functionrpscrud",
+							"Outputs.Arn"
+						]
+					},
+					"env": "dev"
+				}
+			}
+		},
+		"apirpsreact": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/api/rpsreact-cloudformation-template.json",
+				"Parameters": {
+					"authRoleName": {
+						"Ref": "AuthRoleName"
+					},
+					"unauthRoleName": {
+						"Ref": "UnauthRoleName"
+					},
+					"functionrpslambdaName": {
+						"Fn::GetAtt": [
+							"functionrpslambda",
+							"Outputs.Name"
+						]
+					},
+					"functionrpslambdaArn": {
+						"Fn::GetAtt": [
+							"functionrpslambda",
+							"Outputs.Arn"
+						]
+					},
+					"env": "dev"
+				}
+			}
+		},
 		"UpdateRolesWithIDPFunction": {
 			"DependsOn": [
 				"AuthRole",

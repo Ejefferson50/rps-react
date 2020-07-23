@@ -20,12 +20,12 @@ import PVP from './components/GameContainer/PVP';
 //Importing AWS Amplify
 import Amplify, {Auth} from 'aws-amplify';
 import awsmobile from './aws-exports.js';
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignOut} from '@aws-amplify/ui-react';
+import { withAuthenticator, AmplifySignIn, AmplifySignOut} from '@aws-amplify/ui-react';
 
 Amplify.configure(awsmobile);
 
 
-export default class App extends Component {
+class App extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -34,6 +34,19 @@ export default class App extends Component {
             currentPlayerScore:0,
             currentEnemyScore:0
         }
+    }
+
+    getCurrentUser() {
+        Auth.currentAuthenticatedUser().then(user =>{
+            this.setState({
+                user
+            });
+        });
+    }
+
+    
+    componentDidMount(){
+        this.getCurrentUser();
     }
 
     handleRecordWins = (n) => {
@@ -68,7 +81,7 @@ export default class App extends Component {
                         <Route path='/login' component={Login} />
                         <Route path='/signup' component={Signup} />
                         <Route path='/terms' component={Terms} />
-                        <Route exact path='/user' component={UserHome} />
+                        <Route path='/home' component={UserHome} />
                         <Route path='/user/rules' component={Rules} />
                         <Route path='/user/profile' render={(props) =>
                         <UserStats 
@@ -96,3 +109,5 @@ export default class App extends Component {
         );
     }
 }
+
+export default withAuthenticator(App);

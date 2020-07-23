@@ -1,0 +1,7 @@
+{
+    "tableName": "rpsusertable",
+    "partitionKeyName": "user_id",
+    "partitionKeyType": "N",
+    "sortKeyName": "user_email",
+    "sortKeyType": "S"
+}

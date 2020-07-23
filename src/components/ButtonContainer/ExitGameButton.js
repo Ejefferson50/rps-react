@@ -9,7 +9,7 @@ export default class ExitGameButton extends Component{
             <button       
             type="button" className="exit"
             id="game-button"
-            onClick={() => {history.push('/user')}}
+            onClick={() => {history.push('/home')}}
             > Exit</button>
         ));
         return <Button /> 

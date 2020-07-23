@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/users",
+            "lambdaFunction": "rpscrud",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "rpsplayers",
+    "apiName": "rpsplayers",
+    "functionArns": [
+        {
+            "lambdaFunction": "rpscrud"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-rpsreact-dev-200424-authRole",
+        "unAuthRoleName": "amplify-rpsreact-dev-200424-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "rpscrud",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

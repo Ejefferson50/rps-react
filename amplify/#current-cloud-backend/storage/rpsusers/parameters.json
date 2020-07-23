@@ -1,0 +1,5 @@
+{
+    "tableName": "rpsusers",
+    "partitionKeyName": "user_id",
+    "partitionKeyType": "N"
+}

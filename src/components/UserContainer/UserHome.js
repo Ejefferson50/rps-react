@@ -29,8 +29,7 @@ export default class UserHome extends Component {
                         <br /> 
                         <Link to="/user/donation" id="user-home-link"><button>Donate</button></Link>
                         <br/>
-                        <LogoutButton />
-                        
+                                               
                         <RulesButton />
                     </div>
                 </div>

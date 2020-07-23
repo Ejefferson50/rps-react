@@ -10,6 +10,11 @@
 			"StackName": "amplify-rpsreact-dev-200424",
 			"StackId": "arn:aws:cloudformation:us-east-1:465781991717:stack/amplify-rpsreact-dev-200424/8b3ac600-cc56-11ea-9b35-121b03ae900d",
 			"AmplifyAppId": "d1ywijxkagjbbl"
+		},
+		"categories": {
+			"auth": {
+				"rpsreact5171b3e9": {}
+			}
 		}
 	},
 	"auth": {
@@ -18,11 +23,6 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false,
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/auth/rpsreact5171b3e9-cloudformation-template.yml",
-				"logicalId": "authrpsreact5171b3e9"
-			},
-			"lastPushTimeStamp": "2020-07-22T20:10:55.258Z",
 			"output": {
 				"AppClientSecret": "jsk0jk4irkn4o9p7omd42ofvikpjcohs0at64fqrdh6kb1dq4sq",
 				"UserPoolId": "us-east-1_nvhWY5M5g",
@@ -32,7 +32,173 @@
 				"IdentityPoolName": "rpsreact5171b3e9_identitypool_5171b3e9__dev",
 				"UserPoolName": "rpsreact5171b3e9_userpool_5171b3e9"
 			},
-			"lastPushDirHash": "ixchvb9GrpU18LfgxJzr4NEV+kY="
+			"lastPushTimeStamp": "2020-07-23T17:47:23.508Z",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/auth/rpsreact5171b3e9-cloudformation-template.yml",
+				"logicalId": "authrpsreact5171b3e9"
+			}
+		}
+	},
+	"storage": {
+		"rpsusers": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/storage/rpsusers-cloudformation-template.json",
+				"logicalId": "storagerpsusers"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"PartitionKeyName": "user_id",
+				"Region": "us-east-1",
+				"Arn": "arn:aws:dynamodb:us-east-1:465781991717:table/rpsusers-dev",
+				"StreamArn": "arn:aws:dynamodb:us-east-1:465781991717:table/rpsusers-dev/stream/2020-07-23T17:45:03.272",
+				"PartitionKeyType": "N",
+				"Name": "rpsusers-dev"
+			},
+			"lastPushDirHash": "XgxBTvqV9OoCEHbWtOz1KmH0voc="
+		},
+		"rpsusertable": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/storage/rpsusertable-cloudformation-template.json",
+				"logicalId": "storagerpsusertable"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"PartitionKeyName": "user_id",
+				"SortKeyName": "user_email",
+				"SortKeyType": "S",
+				"Region": "us-east-1",
+				"Arn": "arn:aws:dynamodb:us-east-1:465781991717:table/rpsusertable-dev",
+				"StreamArn": "arn:aws:dynamodb:us-east-1:465781991717:table/rpsusertable-dev/stream/2020-07-23T17:45:02.623",
+				"PartitionKeyType": "N",
+				"Name": "rpsusertable-dev"
+			},
+			"lastPushDirHash": "OBniDZuxSARHr7FctN8Q/V4XH3I="
+		}
+	},
+	"function": {
+		"rpscrud": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "rpsusers",
+					"attributes": [
+						"Name",
+						"Arn"
+					],
+					"attributeEnvMap": {
+						"Name": "TABLE_NAME",
+						"Arn": "TABLE_ARN"
+					}
+				}
+			],
+			"lastBuildTimeStamp": "2020-07-23T17:44:39.166Z",
+			"lastPackageTimeStamp": "2020-07-23T17:44:47.672Z",
+			"distZipFilename": "rpscrud-525271304b324a495a66-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/function/rpscrud-cloudformation-template.json",
+				"logicalId": "functionrpscrud"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:465781991717:function:rpscrud-dev",
+				"Name": "rpscrud-dev",
+				"LambdaExecutionRole": "rpsreactLambdaRoledb56b886-dev"
+			},
+			"lastPushDirHash": "zkR+MoXJbDjCOD9vDtqC9HrgH5s="
+		},
+		"rpslambda": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "rpsusertable",
+					"attributes": [
+						"Name",
+						"Arn"
+					],
+					"attributeEnvMap": {
+						"Name": "TABLE_NAME",
+						"Arn": "TABLE_ARN"
+					}
+				}
+			],
+			"lastBuildTimeStamp": "2020-07-23T17:44:39.174Z",
+			"lastPackageTimeStamp": "2020-07-23T17:44:47.575Z",
+			"distZipFilename": "rpslambda-337563705a2f726f3735-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/function/rpslambda-cloudformation-template.json",
+				"logicalId": "functionrpslambda"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:465781991717:function:rpslambda-dev",
+				"Name": "rpslambda-dev",
+				"LambdaExecutionRole": "rpsreactLambdaRolec7fdc685-dev"
+			},
+			"lastPushDirHash": "xp5vcSSwXrgigJYVntO/TSXScQ0="
+		}
+	},
+	"api": {
+		"rpsplayers": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "rpscrud",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/api/rpsplayers-cloudformation-template.json",
+				"logicalId": "apirpsplayers"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"ApiName": "rpsplayers",
+				"RootUrl": "https://9yh2zniz40.execute-api.us-east-1.amazonaws.com/dev",
+				"ApiId": "9yh2zniz40"
+			},
+			"lastPushDirHash": "kSnPW+Gth9lXz5X5qnfY6q5HvLs="
+		},
+		"rpsreact": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "rpslambda",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-200424-deployment/amplify-cfn-templates/api/rpsreact-cloudformation-template.json",
+				"logicalId": "apirpsreact"
+			},
+			"lastPushTimeStamp": "2020-07-23T17:47:23.611Z",
+			"output": {
+				"ApiName": "rpsreact",
+				"RootUrl": "https://yndyr7vm3i.execute-api.us-east-1.amazonaws.com/dev",
+				"ApiId": "yndyr7vm3i"
+			},
+			"lastPushDirHash": "jnpYaD4eSEojIX8Wry+btH5rExc="
 		}
 	}
 }
