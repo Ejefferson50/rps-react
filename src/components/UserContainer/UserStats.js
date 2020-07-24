@@ -16,7 +16,7 @@ export default class UserStats extends Component {
         return (
             <div className="userStats">
                 <div className="return">
-                    <Link to="/user"><button><i class="fas fa-arrow-alt-circle-left"></i></button></Link>
+                    <Link to="/"><button><i class="fas fa-arrow-alt-circle-left"></i></button></Link>
                 </div>
 
                 <br />

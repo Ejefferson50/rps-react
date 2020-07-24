@@ -4,10 +4,7 @@ html{
  
   font-family: 'Montserrat', sans-serif;
   border: #282c34 solid;
-  height: 100%;
-  width: auto;
-  margin: 0;
-
+  
 }
 
 .App{
@@ -16,7 +13,6 @@ html{
   align-content: flex-end;
   justify-content: center;  
   text-align: center;
-  height: 100%;
   width: auto;
   margin: 0; 
 

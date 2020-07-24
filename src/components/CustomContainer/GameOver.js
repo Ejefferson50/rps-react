@@ -45,7 +45,7 @@ export default class GameOver extends Component {
             <Button variant="primary" onClick={this.handleReset}>
               Play Again?
             </Button>
-            <Link to="/user" >
+            <Link to="/" >
             <Button variant="secondary" onClick={this.handleReset}>Quit</Button>
             </Link>
           </Modal.Footer>

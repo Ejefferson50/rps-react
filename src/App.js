@@ -3,11 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//Importing Login Features
-import Welcome from './components/LoginContainer/Welcome';
-import Login from './components/LoginContainer/Login';
-import Signup from './components/LoginContainer/Signup';
-
 //Importing User Features
 import UserHome from './components/UserContainer/UserHome';
 import UserStats from './components/UserContainer/UserStats';
@@ -76,12 +71,7 @@ class App extends Component {
                 <div className="App">
                   
                     <Switch>
-                        <Route exact path='/' component={Welcome} />
-                        <Route path='/welcome' component={Welcome} />
-                        <Route path='/login' component={Login} />
-                        <Route path='/signup' component={Signup} />
-                        <Route path='/terms' component={Terms} />
-                        <Route path='/home' component={UserHome} />
+                        <Route exact path='/' component={UserHome} />                        
                         <Route path='/user/rules' component={Rules} />
                         <Route path='/user/profile' render={(props) =>
                         <UserStats 
@@ -110,4 +100,4 @@ class App extends Component {
     }
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, true);

@@ -9,7 +9,7 @@ export default class GotItButton extends Component{
             <button       
             type="button" class = "gotit"
             id="game-button"
-            onClick={() => {history.push('/user')}}
+            onClick={() => {history.push('/')}}
             > <b>Got It! </b></button>
         ));
         return <Button /> 

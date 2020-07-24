@@ -152,7 +152,7 @@ export default class PVE extends Component {
             <div className="rps-game">
                 <div className="result-message-display">
                     <div className="return">
-                        <Link to="/user">
+                        <Link to="/">
                             <button>
                                 <i class="fas fa-arrow-alt-circle-left"></i>
                             </button>
