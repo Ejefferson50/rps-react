@@ -1,0 +1,39 @@
+{
+    "paths": [
+        {
+            "name": "/user/record",
+            "lambdaFunction": "userrecordfunc",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/GET",
+                    "/PUT",
+                    "/PATCH"
+                ]
+            }
+        }
+    ],
+    "resourceName": "rpsuserapi",
+    "apiName": "rpsuserapi",
+    "functionArns": [
+        {
+            "lambdaFunction": "userrecordfunc"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-rpsreact-dev-201913-authRole",
+        "unAuthRoleName": "amplify-rpsreact-dev-201913-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "userrecordfunc",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
