@@ -1,0 +1,7 @@
+{
+    "tableName": "userrecords",
+    "partitionKeyName": "user_id",
+    "partitionKeyType": "S",
+    "sortKeyName": "wins",
+    "sortKeyType": "N"
+}

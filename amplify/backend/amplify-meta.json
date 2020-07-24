@@ -1,0 +1,121 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "amplify-rpsreact-dev-201913-authRole",
+			"UnauthRoleArn": "arn:aws:iam::465781991717:role/amplify-rpsreact-dev-201913-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::465781991717:role/amplify-rpsreact-dev-201913-authRole",
+			"Region": "us-east-1",
+			"DeploymentBucketName": "amplify-rpsreact-dev-201913-deployment",
+			"UnauthRoleName": "amplify-rpsreact-dev-201913-unauthRole",
+			"StackName": "amplify-rpsreact-dev-201913",
+			"StackId": "arn:aws:cloudformation:us-east-1:465781991717:stack/amplify-rpsreact-dev-201913/f2457120-cdea-11ea-b061-0e706f74ed45",
+			"AmplifyAppId": "d33zcubjmudosd"
+		}
+	},
+	"storage": {
+		"userrecords": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-201913-deployment/amplify-cfn-templates/storage/userrecords-cloudformation-template.json",
+				"logicalId": "storageuserrecords"
+			},
+			"lastPushTimeStamp": "2020-07-24T20:27:26.145Z",
+			"output": {
+				"PartitionKeyName": "user_id",
+				"SortKeyName": "wins",
+				"SortKeyType": "N",
+				"Region": "us-east-1",
+				"Arn": "arn:aws:dynamodb:us-east-1:465781991717:table/userrecords-dev",
+				"StreamArn": "arn:aws:dynamodb:us-east-1:465781991717:table/userrecords-dev/stream/2020-07-24T20:24:33.982",
+				"PartitionKeyType": "S",
+				"Name": "userrecords-dev"
+			},
+			"lastPushDirHash": "bpGWlOBBpzR17dGLMUPzyaK/f9A="
+		}
+	},
+	"function": {
+		"userrecordfunc": {
+			"build": true,
+			"providerPlugin": "awscloudformation",
+			"service": "Lambda",
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "userrecords",
+					"attributes": [
+						"Name",
+						"Arn"
+					],
+					"attributeEnvMap": {
+						"Name": "TABLE_NAME",
+						"Arn": "TABLE_ARN"
+					}
+				}
+			],
+			"lastBuildTimeStamp": "2020-07-24T20:24:15.993Z",
+			"lastPackageTimeStamp": "2020-07-24T20:24:19.889Z",
+			"distZipFilename": "userrecordfunc-77665750625448476e64-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-201913-deployment/amplify-cfn-templates/function/userrecordfunc-cloudformation-template.json",
+				"logicalId": "functionuserrecordfunc"
+			},
+			"lastPushTimeStamp": "2020-07-24T20:27:26.145Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:465781991717:function:userrecordfunc-dev",
+				"Name": "userrecordfunc-dev",
+				"LambdaExecutionRole": "rpsreactLambdaRolec8b198a9-dev"
+			},
+			"lastPushDirHash": "3R3fMj/KFqztx0P+nPzhaC3eVCM="
+		}
+	},
+	"auth": {
+		"cognitoa4078af8": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-201913-deployment/amplify-cfn-templates/auth/cognitoa4078af8-cloudformation-template.yml",
+				"logicalId": "authcognitoa4078af8"
+			},
+			"lastPushTimeStamp": "2020-07-24T20:27:26.145Z",
+			"output": {
+				"AppClientSecret": "13h5eafsm11licmvogms97imbhjr1s1lf8j10k6m8qd68uokjslc",
+				"UserPoolId": "us-east-1_XSxVZ3zwJ",
+				"AppClientIDWeb": "7bsot9ssj3e0cpbpbi46osio7l",
+				"AppClientID": "6mg7pqhlki8kh3eglr7opkorln",
+				"IdentityPoolId": "us-east-1:b91a7374-3c6e-4f90-aa26-47b332bc3ecb",
+				"IdentityPoolName": "rpsreact_identitypool_2620c3e1__dev",
+				"UserPoolName": "rpsreact_userpool_2620c3e1"
+			},
+			"lastPushDirHash": "nGs3XZlfhM7of+ahshFm90aA5gw="
+		}
+	},
+	"api": {
+		"rpsuserapi": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "userrecordfunc",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-rpsreact-dev-201913-deployment/amplify-cfn-templates/api/rpsuserapi-cloudformation-template.json",
+				"logicalId": "apirpsuserapi"
+			},
+			"lastPushTimeStamp": "2020-07-24T20:27:26.145Z",
+			"output": {
+				"ApiName": "rpsuserapi",
+				"RootUrl": "https://0aam7b7qwa.execute-api.us-east-1.amazonaws.com/dev",
+				"ApiId": "0aam7b7qwa"
+			},
+			"lastPushDirHash": "UpVFLFHFQFldal0zMIvfu3k8ZjQ="
+		}
+	}
+}
